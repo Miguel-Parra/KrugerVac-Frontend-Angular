@@ -1,0 +1,62 @@
+<div class="container">
+
+    <h2 class="mt-3 text-center">{{empleado.id_empleado? 'Editar Empleado' : ' Nuevo Empleado'}} </h2>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 text-center">
+            <img src="assets/imagenes/user.png" style="width: 50%;" alt="imagen">
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <form [formGroup]="miFormCrearEditar" autocomplete="off" (submit)="agregarEmpleado()"
+                (keydown.enter)="$event.preventDefault()">
+
+                <div class="row">
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Cédula</label>
+                        <input formControlName="cedula" type="text" class="form-control"
+                            placeholder="Ingrese la cédula">
+                        <span *ngIf="validarCampo('cedula')" class="form-text text-danger">
+                            {{cedulaErrorMsg}}
+                        </span>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Nombres</label>
+                        <input formControlName="nombres" type="text" class="form-control"
+                            placeholder="Ingrese los nombres">
+                        <span *ngIf="validarCampo('nombres')" class="form-text text-danger">
+                            {{nombresErrorMsg}}
+                        </span>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Apellidos</label>
+                        <input formControlName="apellidos" type="text" class="form-control"
+                            placeholder="Ingrese los apellidos">
+                        <span *ngIf="validarCampo('apellidos')" class="form-text text-danger">
+                            {{apellidosErrorMsg}}
+                        </span>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Correo Electrónico</label>
+                        <input formControlName="email" type="text" class="form-control" placeholder="Ingrese el correo">
+                        <span *ngIf="validarCampo('email')" class="form-text text-danger">
+                             {{emailErrorMsg}}
+                        </span>
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-3" [disabled]="miFormCrearEditar.invalid">
+                        <i [class]="colocarIcono()"></i> {{empleado.id_empleado? 'Actualizar': 'Crear'}}</button>
+                    <button type="button" class="btn btn-danger mt-3" (click)="regresar()">
+                        <i class="pi pi-arrow-left"></i> Regresar</button>
+
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>

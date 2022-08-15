@@ -1,0 +1,72 @@
+<div class="row bg-primary">
+    <div class="row mt-2">
+        <div class="col">
+            <h4 class="float-start ml-5">{{usuarioConectado.usuario}}</h4>
+        </div>
+        <div class="col">
+            <button class="btn btn-outline-light float-end mr-5" (click)="salir()"> <i class="pi pi-arrow-left"></i>
+                Salir</button>
+        </div>
+       
+    </div>
+</div>
+
+<div class="container mt-5">
+
+   
+
+    <div class="card">
+        <div class="card-header">
+            Filtros
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col">Vacunados</div>
+                <div class="col">Tipo Vacuna</div>
+                <div class="col">Fecha</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="table-responsive-md mt-5 mb-3 text-center ">
+        <table class="table align-middle">
+            <thead class="bg-primary">
+                <tr>
+                    <th scope="col">Cédula</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Vacunado</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let empleado of empleados; let i=index">
+                    <td>{{empleado.cedula}}</td>
+                    <td>{{empleado.nombres}} {{empleado.apellidos}}</td>
+                    <td>{{empleado.email}}</td>
+                    <td>{{empleado.vacunado}}</td>
+                    <td>
+                        <div class="row text-center">
+                            <div class="col">
+                                <button type="button" class="btn  btn-outline-danger" (click)="eliminar(empleado)"><i
+                                        class="pi pi-trash"></i></button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn  btn-outline-success" (click)="editar(empleado)"><i
+                                        class="pi pi-user-edit"></i></button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn  btn-outline-info"
+                                    (click)="informacionEmpleado(empleado)"><i class="pi pi-info-circle"></i></button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <button class="btn btn-outline-primary float-end mb-3" (click)="agregarEmpleado()">Agregar Empleado</button>
+</div>

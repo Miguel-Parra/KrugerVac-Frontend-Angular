@@ -1,0 +1,53 @@
+<div class="container mt-4">
+
+    <div class="row">
+        <div class="col-xl-4 col-lg-3 col-md-2"></div>
+        <div class="col-xl-4 col-lg-6 col-md-8">
+            <div class="card">
+                <h3 class="text-center mt-4">Login</h3>
+                <hr>
+                <div class="row text-center">
+                    <div class="col">
+                        <img src="assets/imagenes/user.png" class="card-img-top" style="width: 200px;" alt="imagen">
+                    </div>
+                </div>
+
+                <div class="card-body">
+
+                    <form (keydown.enter)="$event.preventDefault()" [formGroup]="miFormLogin" (submit)="login()">
+                        <div class="col">
+                            <label>Modo:</label>
+                            <select class="form-control" formControlName="rol">
+                                <option *ngFor="let rol of roles" [value]="rol.id_rol"> {{rol.nombre_rol}} </option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>Usuario:</label>
+                            <input type="text" class="form-control" placeholder="Ingrese su usuario"
+                                formControlName="usuario">
+                            <span *ngIf="validarCampo('usuario')" class="form-text text-danger">
+                                Campo Obligatorio
+                            </span>
+                        </div>
+                        <div class="col">
+                            <label>Contraseña:</label>
+                            <input type="password" class="form-control" placeholder="Ingrese su contraseña"
+                                formControlName="password">
+                            <span *ngIf="validarCampo('password')" class="form-text text-danger">
+                                Campo Obligatorio
+                            </span>
+                        </div>
+                        <button type="submit" class="btn btn-outline-success float-end mt-2 mb-2"
+                            [disabled]="miFormLogin.pending">Ingresar</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xl-3"></div>
+    </div>
+
+
+
+</div>

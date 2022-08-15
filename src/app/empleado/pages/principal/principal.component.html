@@ -1,0 +1,124 @@
+<div class="row bg-primary mt-2">
+
+    <div class="col">
+        <h5 class="float-start ml-4">{{usuarioConectado.informacionCompleta.usuario}}</h5>
+    </div>
+    <div class="col">
+        <button class="btn btn-outline-light float-end mr-4" (click)="salir()"> <i class="pi pi-arrow-left"></i>
+            Salir</button>
+    </div>
+</div>
+
+
+<div class="container">
+
+    <h5 class="text-center mt-4">INFORMACIÓN PRINCIPAL</h5>
+    <hr>
+
+
+    <div class="row mb-4">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <label class="col-form-label"> Cédula: </label>
+            <input class="form-control" [value]="usuarioConectado.informacionCompleta.cedula" disabled>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <label class="col-form-label"> Nombres: </label>
+            <input class="form-control" value="{{ usuarioConectado.informacionCompleta.nombres | titlecase }}" disabled>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
+            <label class="col-form-label"> Apellidos: </label>
+            <input class="form-control" value="{{ usuarioConectado.informacionCompleta.apellidos | titlecase }}"
+                disabled>
+        </div>
+
+    </div>
+
+    <h5 class="text-center">INFORMACIÓN ADICIONAL</h5>
+    <hr>
+    <div class="row mb-4">
+        <form [formGroup]="miFormInfoAdicional" (keydown.enter)="$event.preventDefault()">
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <label class="col-form-label"> Fecha de nacimiento: </label>
+                    <input formControlName="fecha_nacimiento" class="form-control">
+                    <span *ngIf="validarCampo('fecha_nacimiento')" class="form-text text-danger">
+                        {{fechaNacimientoErrorMsg}}
+                    </span>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <label class="col-form-label"> Dirección de domicilio: </label>
+                    <input formControlName="direccion_domicilio" class="form-control">
+                    <span *ngIf="validarCampo('direccion_domicilio')" class="form-text text-danger">
+                        {{direccionDomicilioErrorMsg}}
+                    </span>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <label class="col-form-label"> Telefono móvil: </label>
+                    <input formControlName="telefono_movil" class="form-control">
+                    <span *ngIf="validarCampo('telefono_movil')" class="form-text text-danger">
+                        {{telefonoMovilErrorMsg}}
+                    </span>
+                </div>
+
+
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <label class="col-form-label"> Estado: </label>
+
+                    <div class="form-check">
+                        <input formControlName="vacunado" class="form-check-input" type="radio" value="true"
+                            id="radioVacunado" (click)="verificarVacunado('true')">
+                        <label class="form-check-label" for="radioVacunado">
+                            Vacunado
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input formControlName="vacunado" class="form-check-input" type="radio" value="false"
+                            id="radioNoVacunado" (click)="verificarVacunado('false')">
+                        <label class="form-check-label" for="radioNoVacunado">
+                            No vacunado
+                        </label>
+                    </div>
+                    <span *ngIf="validarCampo('vacunado')" class="form-text text-danger">
+                        {{vacunadoErrorMsg}}
+                    </span>
+                </div>
+            </div>
+            <div class=" text-center">
+                <button class="btn btn-outline-primary float-center" [disabled]="miFormInfoAdicional.invalid"
+                    (click)="actualizarInformacion()">Actualizar</button>
+            </div>
+        </form>
+
+    </div>
+
+
+
+
+    <h5 class="text-center">VACUNAS</h5>
+    <hr>
+
+    <div class="table-responsive-lg mt-5 mb-3 text-center ">
+        <table class="table align-middle">
+            <thead class="bg-primary">
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Dosis</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vacuna of vacunas; let i=index">
+                    <td>{{vacuna.nombre}}</td>
+                    <td>{{vacuna.fecha_vacunacion | date:'YYYY-MM-dd'}}</td>
+                    <td>{{vacuna.dosis}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class=" text-center">
+        <button class="btn btn-outline-primary mb-3 " (click)="agregarVacuna()">Agregar Vacuna</button>
+
+    </div>
+</div>

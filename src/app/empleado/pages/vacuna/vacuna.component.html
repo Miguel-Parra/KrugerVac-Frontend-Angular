@@ -1,0 +1,65 @@
+
+<div class="row bg-primary mt-2 mb-5">
+    <h2 class="mt-3 text-center">{{vacuna.id_vacuna? 'Editar' : 'Registrar'}} Información Vacuna</h2>
+   
+</div>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6 text-center">
+            <img src="assets/imagenes/vacuna.png" style="width: 50%;" alt="imagen">
+        </div>
+
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <form [formGroup]="miFormVacuna" autocomplete="off" (submit)="agregarVacuna()"
+                (keydown.enter)="$event.preventDefault()">
+
+                <div class="row">
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Tipo de Vacuna</label>
+                        <select class="form-control" formControlName="nombre">
+                            <option *ngFor="let vacuna of vacunas" [value]="vacuna.id_vacuna"> {{vacuna.nombre}} </option>
+                        </select>
+                        <span *ngIf="validarCampo('nombre')" class="form-text text-danger">
+                            {{nombreErrorMsg}}
+                        </span>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Fecha de vacunación</label>
+                        <input formControlName="fecha_vacunacion" type="text" class="form-control"
+                            placeholder="Ingrese la fecha de vacunación">
+                        <span *ngIf="validarCampo('fecha_vacunacion')" class="form-text text-danger">
+                            {{fechaVacunacionErrorMsg}}
+                        </span>
+                    </div>
+                    <div class="col-xl-6 col-sm-12 mb-2">
+                        <label class="form-label">Número de dosis</label>
+                        <input formControlName="dosis" type="text" class="form-control"
+                            placeholder="Ingrese el número de dosis">
+                        <span *ngIf="validarCampo('dosis')" class="form-text text-danger">
+                            {{dosisErrorMsg}}
+                        </span>
+                    </div>
+
+
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary form-control" [disabled]="miFormVacuna.invalid">
+                            <i [class]="colocarIcono()"></i> {{vacuna.id_vacuna? 'Actualizar': 'Crear'}}</button>
+                    </div>
+                    <div class="col">
+                        <button type="button" class="btn btn-info form-control" (click)="regresar()">
+                            <i class="pi pi-arrow-left"></i> Regresar</button>
+                    </div>
+                </div>
+
+
+
+            </form>
+
+        </div>
+
+    </div>
+</div>
